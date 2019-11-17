@@ -183,4 +183,25 @@ void dwa()
     }
     //cout<<endl<<min<<endl<<max;
     waitKey(1000);
+    destroyWindow("wejscie");
+}
+
+int main()
+{
+    int skal = 0;
+    cap.open(0); //do pracy ZAWSZE wlaczone
+
+    skalowanie();
+    getImage();
+    system("cls");
+    cout << "Czy skalowanie przebieglo poprawnie?? (1 jesli tak)";
+    cin >> skal;
+    if (skal != 1)
+    {
+        skalowanie();
+        getImage();
+    }
+
+    dwa();
+    waitKey(10000);
 }
