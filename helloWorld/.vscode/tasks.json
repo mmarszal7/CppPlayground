@@ -21,11 +21,22 @@
                 "main.out",
                 "main.cpp",
                 "externalFunction/circle.cpp"
+            ]
+        },
+        {
+            "label": "Run",
+            "type": "shell",
+            "command": "./main.out",
+            "dependsOn": [
+                "Build on WSL"
             ],
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
         }
     ]
 }
