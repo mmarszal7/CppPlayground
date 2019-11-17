@@ -3,7 +3,8 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "/home/mmarszal/vcpkg/installed/x64-linux/include/opencv4"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/g++",

@@ -13,3 +13,4 @@
 - [Ultimate C++ tutorial](https://www.youtube.com/watch?v=6y0bp-mnYU0&list=PL17WHdN9gS1uXtfhSPjGwIxAGGUJqFPWx&index=73&t=0s)
 - [g++ Manual Page](http://qcd.phys.cmu.edu/QCDcluster/gnu/g++_man.html)
 - [vcpkg package manager](https://docs.microsoft.com/en-us/cpp/build/vcpkg?view=vs-2019)
+- [CMake + vcpkd + VS Code example](https://github.com/microsoft/vcpkg/blob/master/docs/examples/installing-and-using-packages.md)
