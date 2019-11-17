@@ -19,7 +19,8 @@
                 "-g",
                 "-o",
                 "main.out",
-                "main.cpp"
+                "main.cpp",
+                "externalFunction/circle.cpp"
             ],
             "group": {
                 "kind": "build",
