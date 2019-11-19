@@ -24,6 +24,17 @@
                 "/mnt/c": "${env:systemdrive}/",
                 "/usr": "/usr"
             }
+        },
+        {
+            "name": "mscv Launch",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false
         }
     ]
 }
