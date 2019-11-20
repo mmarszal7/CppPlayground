@@ -42,15 +42,22 @@
             "label": "msvc build",
             "type": "shell",
             "command": "cl.exe",
-            "args": ["/EHsc", "/Zi", "/Fe:", "main.exe", "main.cpp"],
+            "args": [
+                "/EHsc",
+                "/Zi",
+                "/Fe:",
+                "main.exe",
+                "main.cpp",
+                "externalFunction/circle.cpp"
+            ],
             "group": {
-              "kind": "build",
-              "isDefault": true
+                "kind": "build",
+                "isDefault": true
             },
             "presentation": {
-              "reveal": "always"
+                "reveal": "always"
             },
             "problemMatcher": "$msCompile"
-          }
+        }
     ]
 }

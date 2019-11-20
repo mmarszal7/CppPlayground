@@ -13,7 +13,7 @@
 ``` bash
 mkdir build
 cd build
-cmake .. "-DCMAKE_TOOLCHAIN_FILE=../../vcpkg/scripts/buildsystems/vcpkg.cmake"
+cmake .. -DCMAKE_TOOLCHAIN_FILE=../../vcpkg/scripts/buildsystems/vcpkg.cmake #-DVCPKG_TARGET_TRIPLET=x64-windows
 cmake --build .
 ```
 
@@ -23,7 +23,7 @@ cmake --build .
   - Linux: build-essentials (gcc + gdb + make) + CMake
   - Windows: MinGW or MSVC
 - Package managers: vcpkg or Conan.io
-- IDEs: Visual Studio (Code) or Qt
+- IDEs: Visual Studio, VS Code (to make it work run it from Developer CMD for VS) or Qt
 
 ## References:
 

@@ -7,7 +7,7 @@
 using namespace std;
 using namespace cv;
 
-int main()
+void main()
 {
     vector<string> msg{"Hello", "C++", "World", "from", "VS Code!", "and the C++ extension!"};
     cout << "Hello" << endl;
@@ -17,5 +17,6 @@ int main()
 
     Mat img(500, 1000, CV_8UC1, Scalar(70));
     cout << img.size().width << endl;
-    return 0;
+    
+    system("pause");
 }

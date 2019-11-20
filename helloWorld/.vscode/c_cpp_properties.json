@@ -15,7 +15,7 @@
         {
             "name": "Win32",
             "includePath": [
-                "d:/ProgramFiles/vcpkg/installed/x86-windows/include"
+                "d:/ProgramFiles/vcpkg/installed/x64-windows/include"
             ],
             "defines": [],
             "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Professional/VC/Tools/MSVC/14.23.28105/bin/Hostx64/x64/cl.exe",

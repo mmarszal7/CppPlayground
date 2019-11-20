@@ -27,6 +27,7 @@
 #include <numeric>
 #include <ctime>
 #include <cmath>
+#include <algorithm>
 
 #include "Shape.h"
 #include "Circle.h"
