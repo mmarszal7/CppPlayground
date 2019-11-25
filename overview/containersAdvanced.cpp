@@ -11,13 +11,20 @@
 #include <deque>
 #include <list>
 #include <forward_list>
+#include <set>
+#include <map>
+#include <queue>
+#include <stack>
+
+using namespace std;
+
 
 bool isEven(const int &val)
 {
     return (val % 2) == 0;
 }
 
-int main()
+int runAdvancedContainers()
 {
 
     // Contains data stored in order
@@ -45,8 +52,8 @@ int main()
     cout << deq1.at(1) << endl;
 
     // Add at an index using an iterator
-    deque<int>::iterator it = deq1.begin() + 1;
-    deq1.insert(it, 3);
+    deque<int>::iterator it0 = deq1.begin() + 1;
+    deq1.insert(it0, 3);
 
     // Add multiple values
     int tempArr[5] = {6, 7, 8, 9, 10};
@@ -260,8 +267,8 @@ int main()
     set1.erase(it, set1.end());
 
     // Add multiple values
-    int arr[] = {6, 7, 8, 9};
-    set1.insert(arr, arr + 4);
+    int arr3[] = {6, 7, 8, 9};
+    set1.insert(arr3, arr3 + 4);
 
     // Find value, get iterator and then value
     auto val = set1.find(6);
@@ -333,11 +340,11 @@ int main()
     cout << "UB : " << lisa->second << endl;
 
     // Print elements with an iterator
-    map<int, string>::iterator it2;
-    for (it2 = map1.begin(); it2 != map1.end(); ++it2)
+    map<int, string>::iterator it22;
+    for (it22 = map1.begin(); it22 != map1.end(); ++it22)
     {
-        cout << "Key : " << it2->first << endl;
-        cout << "Value : " << it2->second << endl;
+        cout << "Key : " << it22->first << endl;
+        cout << "Value : " << it22->second << endl;
     }
 
     // ----- END OF MAP -----
@@ -349,11 +356,11 @@ int main()
     mmap1.insert(pair<int, string>(1, "Bart"));
     mmap1.insert(pair<int, string>(1, "Lisa"));
     mmap1.insert(pair<int, string>(3, "Marge"));
-    map<int, string>::iterator it3;
-    for (it3 = mmap1.begin(); it3 != mmap1.end(); ++it3)
+    map<int, string>::iterator it32;
+    for (it32 = mmap1.begin(); it32 != mmap1.end(); ++it32)
     {
-        cout << "Key : " << it3->first << endl;
-        cout << "Value : " << it3->second << endl;
+        cout << "Key : " << it32->first << endl;
+        cout << "Value : " << it32->second << endl;
     }
 
     // ----- END OF MULTIMAP -----

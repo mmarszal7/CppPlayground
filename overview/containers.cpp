@@ -82,7 +82,7 @@ public:
 template <typename T, typename U>
 int Person<T, U>::numOfPeople;
 
-int main()
+int runContainers()
 {
     cout << "Circle Area : " << AREA_CIRCLE(5) << endl;
 

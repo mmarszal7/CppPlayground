@@ -129,6 +129,7 @@
     <ClCompile Include="containers.cpp" />
     <ClCompile Include="containersAdvanced.cpp" />
     <ClCompile Include="functional.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="pointers.cpp" />
     <ClCompile Include="regEx.cpp" />
     <ClCompile Include="shape.cpp" />

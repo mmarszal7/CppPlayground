@@ -30,11 +30,13 @@ void ExecuteThread(int id)
     time_t sleepTime =
         chrono::system_clock::to_time_t(nowTime);
 
-    // Convert to current time zone
-    tm myLocalTime = *localtime(&sleepTime);
+    // Convert to current time 
+	tm myLocalTime;
+    localtime_s(&myLocalTime, &sleepTime);
 
     // Print full time information
-    cout << "Thread " << id << " Sleep Time : " << ctime(&sleepTime) << endl;
+	char str[64];
+    cout << "Thread " << id << " Sleep Time : " << ctime_s(str, sizeof str, &sleepTime) << endl;
 
     // Get separate pieces
     cout << "Month : " << myLocalTime.tm_mon << endl;
@@ -50,10 +52,10 @@ void ExecuteThread(int id)
     nowTime = chrono::system_clock::now();
     sleepTime =
         chrono::system_clock::to_time_t(nowTime);
-    cout << "Thread " << id << " Awake Time : " << ctime(&sleepTime) << endl;
+    cout << "Thread " << id << " Awake Time : " << ctime_s(str, sizeof str, &sleepTime) << endl;
 }
 
-int main()
+int runThreads()
 {
     // Create a thread and pass a parameter
     // to the function

@@ -20,7 +20,7 @@ using namespace std;
 // typedef creates an alias for a more complex type name
 typedef vector<int32_t> intVec;
 
-int main()
+int runPointers()
 {
     /* MALLOC EXAMPLE
     // When you define a primitive type like int or
@@ -169,7 +169,7 @@ public:
     void MakePizza() { cout << "Vegan Deep Dish : " << T::AddIngredient(); }
 };
 
-int main()
+int runUniquePtrs()
 {
     // unique_ptr is a smart pointer that disposes of
     // a pointer when it is no longer in use

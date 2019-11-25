@@ -70,7 +70,7 @@ void ShowArea(Shape &shape);
 // to the program if it was executed in a terminal
 // argc : Number of arguments passed
 // argv : Array pointers to strings
-int main(int argc, char **argv)
+int runBasic()
 {
 
     // Outputs the string Hello World to the screen followed by a newline

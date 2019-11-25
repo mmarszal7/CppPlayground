@@ -7,6 +7,7 @@
 #include <cmath>
 #include <sstream>
 #include <fstream> // Used for file IO
+#include <functional>
 
 using namespace std;
 
@@ -31,7 +32,7 @@ double MultBy3(double num)
     return num * 3;
 }
 
-int main()
+int runFunctional()
 {
     // 1. You can store functions as variables
     auto times2 = MultBy2;
