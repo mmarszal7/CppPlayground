@@ -2,7 +2,7 @@
 #include <SFML/Audio.hpp>
 #include <iostream>
 
-int draw(int ifLower, int ifGreater)
+float draw(float ifLower, float ifGreater)
 {
 	return rand() < RAND_MAX / 2 ? ifLower : ifGreater;
 }
@@ -18,8 +18,8 @@ void update(sf::Shape& shape)
 		shape.getPosition().y + draw(-20, 20)
 	);
 
-	shape.setScale(
-		sf::Vector2f(draw(0.9, 1.1), draw(0.9, 1.1))
+	shape.scale(
+		draw(0.9, 1.1), draw(0.9, 1.1)
 	);
 
 	shape.setOutlineThickness(
