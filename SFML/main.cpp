@@ -56,8 +56,14 @@ int main()
 
 	// Textures
 	sf::Texture texture;
-	texture.loadFromFile("texture.png");
+	texture.loadFromFile("resources/texture.png");
 	shape.setTexture(&texture);
+
+	// Sprites
+	sf::Texture spriteTexture;
+	spriteTexture.loadFromFile("resources/spritesheet.png");
+	sf::IntRect spritePart(0, 0, 192, 192);
+	sf::Sprite sprite(spriteTexture, spritePart);
 
 	// Music
 	sf::Music music;
@@ -78,16 +84,44 @@ int main()
 	while (window.isOpen())
 	{
 		while (window.pollEvent(event))
+		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+			if (event.type == sf::Event::KeyPressed)
+			{
+				// Handling keyboard
+				switch (event.key.code)
+				{
+					case sf::Keyboard::Down:
+						spritePart.top = 0;
+						break;
+					case sf::Keyboard::Left:
+						spritePart.top = 192 * 1;
+						break;
+					case sf::Keyboard::Right:
+						spritePart.top = 192 * 2;
+						break;
+					case sf::Keyboard::Up:
+						spritePart.top = 192 * 3;
+						break;
+					default:
+						break;
+				}
+			}
+		}
 
 		window.clear();
 		window.draw(shape);
+		window.draw(sprite);
 		window.display();
-		update(shape);
 
-		std::cout << clock.getElapsedTime().asMilliseconds() << std::endl;
-		clock.restart();
+		if (clock.getElapsedTime().asMilliseconds() >= 200)
+		{
+			update(shape);
+			spritePart.left = spritePart.left == 192 * 2 ? 0 : spritePart.left + 192;
+			sprite.setTextureRect(spritePart);
+			clock.restart();
+		}
 	}
 
 	return 0;
