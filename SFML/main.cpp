@@ -1,4 +1,6 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <iostream>
 
 int draw(int ifLower, int ifGreater)
 {
@@ -57,6 +59,12 @@ int main()
 	texture.loadFromFile("texture.png");
 	shape.setTexture(&texture);
 
+	// Music
+	sf::Music music;
+	music.openFromFile("");
+	music.setVolume(50);
+	music.play();
+
 	// Antialiasing
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
@@ -64,7 +72,9 @@ int main()
 	// Window
 	sf::RenderWindow window(sf::VideoMode(800, 800), "SFML", sf::Style::Default, settings);
 	sf::Event event;
+	sf::Clock clock;
 
+	window.setFramerateLimit(30);
 	while (window.isOpen())
 	{
 		while (window.pollEvent(event))
@@ -75,7 +85,9 @@ int main()
 		window.draw(shape);
 		window.display();
 		update(shape);
-		sf::sleep(sf::milliseconds(100));
+
+		std::cout << clock.getElapsedTime().asMilliseconds() << std::endl;
+		clock.restart();
 	}
 
 	return 0;
