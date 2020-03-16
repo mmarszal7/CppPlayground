@@ -1,4 +1,4 @@
-## OpenGL Concepts:
+## OpenGL Concepts ([minimal setup](minimalExample.cpp)):
 
 **OpenGL state machine** - OpenGL works as a state machine which means that you first **configure its state** and then **run it (draw)**<br>
 **Front and Back buffers** - back buffer concept allow us to update image befor actually drawing it. If we would draw everything on front buffer we would see "drawing process" - from top-left to bottom-right corner<br>
@@ -6,10 +6,6 @@
 **Element id** - all OpenGL components (buffers, shaders, textures etc.) are configured by their ID in GPU memory<br>
 
 ---
-
-<p align="center" display="inline" style="font-size:21px">
-<a src="/minimalExample.cpp">Here</a> is a code for a minimal OpenGL setup
-</p>
 
 **Vertex** (plural Vertices) - data structure with information like position, color, normal vectors etc. each of this information is called **attribure**<br>
 **Vertex input** - sending data (vertices) from CPU to GPU (from C++ code to shaders):
