@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SFML_Game", "SFML_Game\SFML
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SFML_OpenGL", "SFML_OpenGL\SFML_OpenGL.vcxproj", "{AF2670DB-0412-4C59-83D6-080D36BA3526}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenGL", "OpenGL\OpenGL.vcxproj", "{375C05CD-132E-44A4-9BC9-141BF9138F5F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +63,14 @@ Global
 		{AF2670DB-0412-4C59-83D6-080D36BA3526}.Release|x64.Build.0 = Release|x64
 		{AF2670DB-0412-4C59-83D6-080D36BA3526}.Release|x86.ActiveCfg = Release|Win32
 		{AF2670DB-0412-4C59-83D6-080D36BA3526}.Release|x86.Build.0 = Release|Win32
+		{375C05CD-132E-44A4-9BC9-141BF9138F5F}.Debug|x64.ActiveCfg = Debug|x64
+		{375C05CD-132E-44A4-9BC9-141BF9138F5F}.Debug|x64.Build.0 = Debug|x64
+		{375C05CD-132E-44A4-9BC9-141BF9138F5F}.Debug|x86.ActiveCfg = Debug|Win32
+		{375C05CD-132E-44A4-9BC9-141BF9138F5F}.Debug|x86.Build.0 = Debug|Win32
+		{375C05CD-132E-44A4-9BC9-141BF9138F5F}.Release|x64.ActiveCfg = Release|x64
+		{375C05CD-132E-44A4-9BC9-141BF9138F5F}.Release|x64.Build.0 = Release|x64
+		{375C05CD-132E-44A4-9BC9-141BF9138F5F}.Release|x86.ActiveCfg = Release|Win32
+		{375C05CD-132E-44A4-9BC9-141BF9138F5F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

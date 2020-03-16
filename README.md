@@ -1,5 +1,6 @@
 ## **Projects:**
 - **CMakeHelloWorld** - example of how to setup project with CMake
+- **[OpenGL](/OpenGL/notes.md)** - overview of how to use OpenGL
 - **Overview** - overview of C++ language features 
 - **SFML** - demo project showing how to [configure VS](/SFML/README.md) and how to use SFML: shapes, textures, music, handling events (e.g. keyboard)
 - **SFML_Game** - example of how to make animations, sprites, collision detection, jumping/gravitation, views/camera etc. in SGML - based on [Hilze Vonck's playlist](https://www.youtube.com/watch?v=axIgxBQVBg0&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=1) 
