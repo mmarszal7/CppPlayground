@@ -66,6 +66,30 @@
 
 ---
 
+## [Transformations](https://learnopengl.com/Getting-started/Coordinate-Systems):
+
+In order to create the final scene we transform original vertices throught several **coordinate systems**:
+
+- Local - move parts of object, rotate it, move it in certain direction
+- World - move object in the world
+- View - move world
+- Clip - cut world according to fustum (orthographic or perspective)
+- Screen space
+
+<p align="center" display="inline"> 
+<img width="500px" src="https://learnopengl.com/img/getting-started/coordinate_systems.png"/>
+</p>
+
+Process of converting vertices throught all those coordinate systems is called **MVP** (model-view-projection)<br>
+
+In every of those transformations between **coordinate systems** we are using 3 main types of matrix operations:
+
+<p align="center" display="inline"> 
+<img width="500px" src="transformations.png"/>
+</p>
+
+---
+
 ## Resources:
 
 https://learnopengl.com/Introduction

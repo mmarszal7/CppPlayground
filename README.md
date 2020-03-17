@@ -39,6 +39,14 @@ cmake --build .
 - Package managers: vcpkg or Conan.io
 - IDEs: Visual Studio, VS Code (to make it work run it from Developer CMD for VS), Qt
 
+### C++:
+- pointers type doesn't really have a meaning - it's just memory address (you need type when you want to dereference pointer and get/set value from that memory address)
+- new - new is not for creating new objects but rather for **allocating memory on heap**; using **new** you recive pointer to object on heap
+- in C++ you can create object on stack using *Test test;* instead of *Test* test = new Test();*
+- because with simple declaration (*Test test*) get variable not a pointer, to send object by reference you need to explicitly mark this by:
+	- sending pointer 
+	- requiring reference in function declaration (*void TestFunction(Test& value){}*)
+
 ## References:
 
 - [C++ in WSL with VS Code](https://code.visualstudio.com/docs/cpp/config-wsl)
