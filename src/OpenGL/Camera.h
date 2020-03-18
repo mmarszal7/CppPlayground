@@ -30,6 +30,11 @@ public:
 		return zoom;
 	}
 
+	glm::vec3 getCameraPosition()
+	{
+		return position;
+	}
+
 	void processKeyboard(Camera_Movement direction, float deltaTime)
 	{
 		float velocity = movementSpeed * deltaTime;
