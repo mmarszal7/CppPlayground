@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Player.h"
 #include "Platform.h"
+#include "Collider.h"
 
 static const float VIEW_HEIGHT = 1500.0f;
 
@@ -49,7 +50,7 @@ int main()
 
 		player.Update(deltaTime);
 
-		auto collider = player.GetCollider();
+		Collider collider = player.GetCollider();
 		sf::Vector2f direction;
 		for (Platform& platform : platforms) {
 			if (platform.GetCollider().CheckCollision(collider, direction, 1.0f))
