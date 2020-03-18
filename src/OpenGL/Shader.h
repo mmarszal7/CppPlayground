@@ -68,14 +68,22 @@ public:
 		glDeleteShader(fragment);
 	}
 
-	void use()
+	void use(glm::mat4 model, glm::mat4 view, glm::mat4 projection)
 	{
 		glUseProgram(ID);
+		setMat4("model", model);
+		setMat4("view", view);
+		setMat4("projection", projection);
 	}
 
 	void setInt(const std::string& name, int value) const
 	{
 		glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
+	}
+
+	void setVec3(const std::string& name, float x, float y, float z) const
+	{
+		glUniform3f(glGetUniformLocation(ID, name.c_str()), x, y, z);
 	}
 
 	void setMat4(const std::string& name, glm::mat4 value) const

@@ -17,20 +17,23 @@
   - define how to make shape of your vertices - **Element Buffer Objects (EBO)**
 - **VBO** - Vertex Buffer Object - name might be a little bit misleading but its just representation of some space in memory
 - **VAP** - Vertex Attribure Pointer - describes how to read VBO - where are attribures and how to read them (how big are they, what type etc.)
+    <p align="center" display="inline"> 
+    <img width="500px" src="https://learnopengl.com/img/getting-started/vertex_attribute_pointer_interleaved_textures.png"/>
+    </p>
 - **VAO** - Vertex Array Object - used for configuring VBOs with their VAPs descriptions
 - **EBO** - Element Buffer Object - (not actually part of this workflow) its job is to make bigger shapes from single vertices. Because GPU works on triangles it means that to make a bigger shape you need to define each triangle separetly. EBOs allow you to save VBO space by defining shapes by indexes (from Vertices in VBO) instead of defining whole shapes in VBOs:
 
   ```c++
   // For square we have:
   float vertices[] = {
-  0.5f, 0.5f, 0.0f, // top right
-  0.5f, -0.5f, 0.0f, // bottom right
-  -0.5f, -0.5f, 0.0f, // bottom left
-  -0.5f, 0.5f, 0.0f // top left
+  0.5f, 0.5f, 0.0f,     // top right
+  0.5f, -0.5f, 0.0f,    // bottom right
+  -0.5f, -0.5f, 0.0f,   // bottom left
+  -0.5f, 0.5f, 0.0f     // top left
   };
   unsigned int indices[] = {
-  0, 1, 3, // first triangle
-  1, 2, 3 // second triangle
+  0, 1, 3,              // first triangle
+  1, 2, 3               // second triangle
   };
 
   // Instead of
@@ -49,7 +52,7 @@
 
 ---
 
-**Shaders** - programs running on GPU. Typical workflow for working with shaders:
+**[Shaders](../src/OpenGL/Shader.h)** - programs running on GPU. Typical workflow for working with shaders:
 
 - write shader
 - create shader object and compile it
@@ -80,7 +83,25 @@ In order to create the final scene we transform original vertices throught sever
 <img width="500px" src="https://learnopengl.com/img/getting-started/coordinate_systems.png"/>
 </p>
 
-Process of converting vertices throught all those coordinate systems is called **MVP** (model-view-projection)<br>
+Process of converting vertices throught all those coordinate systems is called **MVP** (model-view-projection) = model position/angle + camera position/angle + field of view<br>
+
+```cpp
+// Model
+glm::mat4 model = glm::mat4(1.0f);
+model = glm::translate(model, glm::vec3(1.0f, 0.0f, 0.0f));
+model = glm::rotate(model, glm::radians(50.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+model = glm::scale(model, glm::vec3(0.2f));
+
+// View - Camera
+glm::vec3 cameraPosition = glm::vec3(3.0f, 2.0f, 0.0f);
+glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+glm::vec3 yAxis = glm::vec3(0.0f, 1.0f, 0.0f);
+glm::mat4 view = glm::lookAt(cameraPosition, cameraTarget, yAxis);
+
+// Projection
+float fov = 45.0f;
+glm::mat4 projection = glm::perspective(glm::radians(fov), 800.0f / 600.0f, 0.1f, 100.0f);
+```
 
 In every of those transformations between **coordinate systems** we are using 3 main types of matrix operations:
 
