@@ -1,11 +1,14 @@
-#include <glad\glad.h>
 #ifndef RENDERER_H
 #define RENDERER_H
+
+#include <glad\glad.h>
+#include "Texture.h"
+#include "Shader.h"
 
 class Renderer
 {
 public:
-	Renderer()
+	Renderer(const char* vertexPath, const char* fragmentPath) : shader(vertexPath, fragmentPath)
 	{
 	}
 
@@ -52,16 +55,27 @@ public:
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 		glEnableVertexAttribArray(2);
+
+		// Shaders
+		Texture texture("resources/container.jpg");
+		shader.setInt("texture", 0);
+		texture.use();
 	}
 
-	void Draw()
+	void Draw(glm::mat4 model, glm::mat4 view, glm::mat4 projection)
 	{
 		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		shader.use(model, view, projection);
+
+		if (drawElements)
+			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		else
+			glDrawArrays(GL_TRIANGLES, 0, 36);
 	}
 
 private:
 	unsigned int VAO;
-
+	Shader shader;
+	bool drawElements = true;
 };
 #endif

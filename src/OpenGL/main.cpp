@@ -39,18 +39,12 @@ int main()
 	glfwSetScrollCallback(window, scroll_callback);
 	glfwSetMouseButtonCallback(window, mouse_click_callback);
 
-	Renderer renderer;
+	Renderer renderer("resources/texture.vert", "resources/texture.frag");
 	renderer.LoadCube();
 
-	// Shaders and textures
-	Texture texture("resources/container.jpg");
-	Shader shader("resources/texture.vert", "resources/texture.frag");
-	shader.setInt("texture", 0);
-
 	// Lamp
-	Renderer lampRenderer;
+	Renderer lampRenderer("resources/lightSource.vert", "resources/lightSource.frag");
 	lampRenderer.LoadCube();
-	Shader lampShader("resources/lightSource.vert", "resources/lightSource.frag");
 
 	glm::vec3 lightPosition = glm::vec3(1.2f, 1.0f, 2.0f);
 	glm::mat4 lightModel = glm::translate(glm::mat4(1.0f), lightPosition);
@@ -73,14 +67,11 @@ int main()
 		glm::mat4 model = glm::rotate(glm::mat4(1.0f), glm::radians(50.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 		glm::mat4 view = camera.getViewMatrix();
 		glm::mat4 projection = glm::perspective(glm::radians(camera.getFOV()), 800.0f / 600.0f, 0.1f, 100.0f);
-
-		shader.use(model, view, projection);
-		texture.use();
-		renderer.Draw();
-
+		
+		renderer.Draw(model, view, projection);
+		
 		// Lamp
-		lampShader.use(lightModel, view, projection);
-		lampRenderer.Draw();
+		lampRenderer.Draw(lightModel, view, projection);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
