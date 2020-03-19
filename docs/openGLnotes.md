@@ -111,7 +111,77 @@ In every of those transformations between **coordinate systems** we are using 3 
 
 ---
 
+## [Lighting](https://www.youtube.com/watch?v=7CdS8oOJtVA):
+
+**Phong lightning model** - one of lighting models that consists 3 main parts: **ambient, diffuse and spectral** lighting. <br>In this model we assume that all light can be presented by sum of: "passive" light (ambient), light reflected in all directions (diffuse) and light reflected in your/watcher direction (specular).
+<br>\*This model is not the best model but its relatively easy to implement, understand and it looks good which is enough for computer graphics("if it looks good, it's good") <br>
+
+1. **Ambient** - simulates "passive" lighting, lighting when there is not clear light source (e.g. dark room at night) - mathematically presented as a constant value throughout a scene<br>
+
+   <img height="30px" src="ambientFormula.png"/>
+    
+    ---
+
+2. **Diffuse** - simulates reflection in all directions - mathematically presented as **cos** between the light source and the surface/vertex normal vector</br>
+
+   <div style="float: left; width:100%">
+   <div style="box-sizing: border-box; float: left; width: 50%; padding: 15px;">
+   <img src="diffuse.png"/>
+   </div>
+   <span><b>Although</b> because calculating cosine is an expensive operation more often we calculate a dot procuct of unit vectors:</span>
+   <div style="box-sizing: border-box; float: left; width: 50%; padding: 15px;">
+   <img src="dotProduct.png"/>
+   </div>
+   <br>
+   <span>And because this cosine cannot be lower than 0 (there is not light below surface) final formula looks like this:</span>
+   <br>
+   <div align="center" display="inline" style="box-sizing: border-box; float: left; width: 50%; padding: 5px;">
+   <img height="40px" src="diffuseFormula.png"/>
+   </div>
+   </div>
+   <span style="color: white;">.</span>
+
+   ***
+
+3. **Specular** - simulates reflection in a single/watcher direction (shiny look) - mathematically presented as a dot procuct between an angle of the light source reflection and the viewer
+
+<p align="center" display="inline"> 
+   <img width="800px" src="specularFormula.png"/>
+</p>
+
+---
+
+4. **Summary**
+
+    ```cpp
+    // diffuse
+    vec3 norm = normalize(Normal);
+    vec3 lightDir = normalize(light.position - FragPos);
+    float diff = max(dot(norm, lightDir), 0.0);
+    
+    // specular
+    vec3 viewDir = normalize(viewPos - FragPos);
+    vec3 reflectDir = reflect(-lightDir, norm);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.  shininess);
+    
+    // Light * material
+    vec3 ambient  = light.ambient  * material.ambient;
+    vec3 diffuse  = light.diffuse  * (diff * material.diffuse);
+    vec3 specular = light.specular * (spec * material.specular);
+    
+    vec3 result = ambient + diffuse + specular;
+    ```
+    
+    To calculate "lighting" in general you need to calculate sum of     all relations between light sources and materials:
+    
+    <p align="center" display="inline"> 
+    <img width="400px" src="finalFormula.png"/>
+    </p>
+
+---
+
 ## Resources:
 
-https://learnopengl.com/Introduction
-https://glad.dav1d.de/#profile=core&language=c&specification=gl&loader=on&api=gl%3D4.6
+- https://learnopengl.com/Introduction
+- Lighting - https://www.youtube.com/watch?v=7CdS8oOJtVA
+- Glad generator - https://glad.dav1d.de/#profile=core&language=c&specification=gl&loader=on&api=gl%3D4.6
