@@ -4,13 +4,15 @@
 #include <glad\glad.h>
 #include "Texture.h"
 #include "Shader.h"
+#include "Mesh.h"
+
+#include <vector>
+using namespace std;
 
 class Renderer
 {
 public:
-	Renderer(const char* vertexPath, const char* fragmentPath) : shader(vertexPath, fragmentPath)
-	{
-	}
+	Renderer(const char* vertexPath, const char* fragmentPath) : shader(vertexPath, fragmentPath), mesh() {	}
 
 	void LoadCubeWithTexture()
 	{
@@ -26,6 +28,7 @@ public:
 			-0.5f, -0.5f, 0.5f,   0.0f, 0.0f, 1.0f,   0.0f, 1.0f, // bottom left
 			-0.5f,  0.5f, 0.5f,   1.0f, 1.0f, 0.0f,   0.0f, 0.0f  // top left 
 		};
+
 		unsigned int indices[] = {
 			0, 1, 3, 1, 2, 3, // bottom
 			4, 5, 6, 6, 7, 4, // top
@@ -35,31 +38,17 @@ public:
 			1, 2, 6, 6, 1, 5  // front
 		};
 
-		// Buffers
-		glGenVertexArrays(1, &VAO);
-		glBindVertexArray(VAO);
+		vector<Vertex> meshVertices;
+		for (size_t i = 0; i < sizeof(vertices) / sizeof(float) / 8; i++)
+			meshVertices.emplace_back(glm::vec3(vertices[8 * i + 0], vertices[8 * i + 1], vertices[8 * i + 2]), glm::vec3(vertices[8 * i + 3], vertices[8 * i + 4], vertices[8 * i + 5]), glm::vec2(vertices[8 * i + 6], vertices[8 * i + 7]), glm::vec3(), glm::vec3());
 
-		unsigned int VBO;
-		glGenBuffers(1, &VBO);
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		vector<unsigned int> meshIndices(indices, indices + sizeof indices / sizeof indices[0]);
 
-		unsigned int EBO;
-		glGenBuffers(1, &EBO);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+		TextureLoader textureLoader("resources/container.jpg");
+		vector<Texture> textures = { Texture(textureLoader.ID, "texture_normal", "resources/container.jpg") };
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-		glEnableVertexAttribArray(2);
-
-		// Shaders
-		Texture texture("resources/container.jpg");
-		shader.setInt("texture", 0);
-		texture.use();
+		Mesh newMesh(meshVertices, meshIndices, textures);
+		mesh = newMesh;
 	}
 
 	void LoadCubeWithLighting()
@@ -109,46 +98,30 @@ public:
 			-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
 		};
 
-		// Buffers
-		glGenVertexArrays(1, &VAO);
-		glBindVertexArray(VAO);
+		vector<Vertex> vec;
+		for (size_t i = 0; i < sizeof(vertices) / sizeof(float) / 8; i++)
+			vec.emplace_back(glm::vec3(vertices[8 * i + 0], vertices[8 * i + 1], vertices[8 * i + 2]), glm::vec3(vertices[8 * i + 3], vertices[8 * i + 4], vertices[8 * i + 5]), glm::vec2(vertices[8 * i + 6], vertices[8 * i + 7]), glm::vec3(), glm::vec3());
 
-		unsigned int VBO;
-		glGenBuffers(1, &VBO);
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		vector<unsigned int> ind;
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-		glEnableVertexAttribArray(2);
+		vector<Texture> textures;
+		TextureLoader textureLoader("resources/container.jpg");
+		textures.emplace_back(textureLoader.ID, "texture_normal", "resources/container.jpg");
 
-		drawElements = false;
-
-		// Shaders
-		Texture texture("resources/container.jpg");
-		shader.setInt("texture", 0);
-		texture.use();
+		Mesh newMesh(vec, ind, textures);
+		mesh = newMesh;
 	}
 
 	void Draw(glm::mat4 model, glm::mat4 view, glm::mat4 projection)
 	{
-		glBindVertexArray(VAO);
 		shader.use(model, view, projection);
-
-		if (drawElements)
-			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		else
-			glDrawArrays(GL_TRIANGLES, 0, 36);
+		mesh.Draw(shader);
 	}
 
 	Shader GetShader() { return shader; }
 
 private:
-	unsigned int VAO;
 	Shader shader;
-	bool drawElements = true;
+	Mesh mesh;
 };
 #endif

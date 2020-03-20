@@ -5,11 +5,11 @@
 #include <stb\stb_image.h>
 #include <string>
 
-class Texture
+class TextureLoader
 {
 public:
 	unsigned int ID;
-	Texture(std::string path)
+	TextureLoader(std::string path)
 	{
 		glGenTextures(1, &ID);
 		glBindTexture(GL_TEXTURE_2D, ID);
@@ -28,14 +28,5 @@ public:
 		glGenerateMipmap(GL_TEXTURE_2D);
 		stbi_image_free(data);
 	}
-
-	void use() {
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, ID);
-	}
-
-private:
-	
-	
 };
 #endif
