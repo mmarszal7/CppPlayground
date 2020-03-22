@@ -17,16 +17,16 @@ int main()
 
 	GLFWwindow* window = setupGLFW(camera);
 
-	//Renderer renderer("resources/lighting.vert", "resources/lighting.frag");
-	//renderer.LoadCubeWithLighting();
+	Renderer renderer("resources/lighting.vert", "resources/lighting.frag");
+	renderer.LoadCubeWithLighting();
 
 	// Lamp
 	//Renderer lampRenderer("resources/lightSource.vert", "resources/lightSource.frag");
 	//lampRenderer.LoadCubeWithTexture();
 
 	// Model
-	Renderer renderer("resources/model.vert", "resources/model.frag");
-	renderer.LoadModel();
+	//Renderer renderer("resources/model.vert", "resources/model.frag");
+	//renderer.LoadModel();
 
 	glm::vec3 lightPosition = glm::vec3(1.2f, 1.0f, 2.0f);
 	glm::mat4 lightModel = glm::translate(glm::mat4(1.0f), lightPosition);
@@ -45,17 +45,17 @@ int main()
 		glm::mat4 projection = glm::perspective(glm::radians(camera.getFOV()), 800.0f / 600.0f, 0.1f, 100.0f);
 
 		// Model
-		renderer.Draw(model, view, projection);
+		//renderer.Draw(model, view, projection)
 
 		// Lighting
-		/*renderer.Draw(model, view, projection);
+		renderer.Draw(model, view, projection);
 		Shader shader = renderer.GetShader();
 		shader.setVec3("lightPosition", lightPosition);
 		shader.setVec3("viewPos", camera.getCameraPosition());
 		shader.setVec3("material.ambient", glm::vec3(1.0f, 0.5f, 0.31f));
 		shader.setVec3("material.diffuse", glm::vec3(1.0f, 0.5f, 0.31f));
 		shader.setVec3("material.specular", glm::vec3(0.5f, 0.5f, 0.5f));
-		shader.setFloat("material.shininess", 32.0f);*/
+		shader.setFloat("material.shininess", 32.0f);
 
 		// Lamp
 		//lampRenderer.Draw(lightModel, view, projection);

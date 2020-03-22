@@ -113,7 +113,8 @@ public:
 				for (int k = 0; k < objects; k++)
 				{
 					for (size_t i = 0; i < sizeof(vertices) / sizeof(float) / 8; i++)
-						vec.emplace_back(glm::vec3(vertices[8 * i + 0] + x, vertices[8 * i + 1] + y, vertices[8 * i + 2] + z), glm::vec3(vertices[8 * i + 3], vertices[8 * i + 4], vertices[8 * i + 5]), glm::vec2(vertices[8 * i + 6], vertices[8 * i + 7]), glm::vec3(), glm::vec3());
+						if (y == 0 || y == objects - 1 || z == 0 || z == objects - 1 || x == 0 || x == objects - 1)
+							vec.emplace_back(glm::vec3(vertices[8 * i + 0] + x, vertices[8 * i + 1] + y, vertices[8 * i + 2] + z), glm::vec3(vertices[8 * i + 3], vertices[8 * i + 4], vertices[8 * i + 5]), glm::vec2(vertices[8 * i + 6], vertices[8 * i + 7]), glm::vec3(), glm::vec3());
 					x++;
 				}
 				x = 0;
