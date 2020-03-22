@@ -98,9 +98,28 @@ public:
 			-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
 		};
 
+		// Batch rendering
 		vector<Vertex> vec;
-		for (size_t i = 0; i < sizeof(vertices) / sizeof(float) / 8; i++)
-			vec.emplace_back(glm::vec3(vertices[8 * i + 0], vertices[8 * i + 1], vertices[8 * i + 2]), glm::vec3(vertices[8 * i + 3], vertices[8 * i + 4], vertices[8 * i + 5]), glm::vec2(vertices[8 * i + 6], vertices[8 * i + 7]), glm::vec3(), glm::vec3());
+		int const objects = 1.0f;
+		float x = 0.0f;
+		float y = 0.0f;
+		float z = 0.0f;
+		for (int ii = 0; ii < objects; ii++)
+		{
+			for (int j = 0; j < objects; j++)
+			{
+				for (int k = 0; k < objects; k++)
+				{
+					for (size_t i = 0; i < sizeof(vertices) / sizeof(float) / 8; i++)
+						vec.emplace_back(glm::vec3(vertices[8 * i + 0] + x, vertices[8 * i + 1] + y, vertices[8 * i + 2] + z), glm::vec3(vertices[8 * i + 3], vertices[8 * i + 4], vertices[8 * i + 5]), glm::vec2(vertices[8 * i + 6], vertices[8 * i + 7]), glm::vec3(), glm::vec3());
+					x++;
+				}
+				x = 0;
+				y++;
+			}
+			y = 0;
+			z++;
+		}
 
 		vector<unsigned int> ind;
 
