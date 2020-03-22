@@ -7,12 +7,14 @@
 #include "Mesh.h"
 
 #include <vector>
+#include "Model.h"
 using namespace std;
 
 class Renderer
 {
 public:
-	Renderer(const char* vertexPath, const char* fragmentPath) : shader(vertexPath, fragmentPath), mesh() {	}
+	Renderer(const char* vertexPath, const char* fragmentPath) :
+		shader(vertexPath, fragmentPath), mesh(), gameModel() {	}
 
 	void LoadCubeWithTexture()
 	{
@@ -131,10 +133,22 @@ public:
 		mesh = newMesh;
 	}
 
+	void LoadModel()
+	{
+		drawFromModel = true;
+
+		Model model("resources/nanosuit/nanosuit.obj");
+		gameModel = model;
+	}
+
 	void Draw(glm::mat4 model, glm::mat4 view, glm::mat4 projection)
 	{
+		if (drawFromModel != NULL)
+			gameModel.Draw(shader);
+		else
+			mesh.Draw(shader);
+
 		shader.use(model, view, projection);
-		mesh.Draw(shader);
 	}
 
 	Shader GetShader() { return shader; }
@@ -142,5 +156,7 @@ public:
 private:
 	Shader shader;
 	Mesh mesh;
+	Model gameModel;
+	bool drawFromModel = false;
 };
 #endif
